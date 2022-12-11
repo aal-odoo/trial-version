@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+user_fsm_material_access,user.fsm.material.access,model_fsm_material,base.group_user,1,1,1,1
+admin_fsm_material_access,admin.fsm.material.access,model_fsm_material,base.group_erp_manager,1,1,1,1

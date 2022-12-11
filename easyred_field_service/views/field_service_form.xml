@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="field_service_form_inherit_easyred" model="ir.ui.view" >
+            <field name="name">view.field.service.form.inherit.easyred</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="materials" string="Materials" attrs="{'invisible': [('is_fsm', '=', False)]}">
+                        <field name="material_ids" nolabel="1" >
+                            <tree editable="bottom">
+                                <field name="task_id" invisible="1"/>
+                                <field name="product_id"/>
+                                <field name="quantity"/>
+                                <field name="qty_on_hand"/>
+                                <field name="uom_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                
+            </field>
+        </record>
+    </data>
+</odoo>

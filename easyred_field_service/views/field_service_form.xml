@@ -5,6 +5,13 @@
             <field name="model">project.task</field>
             <field name="inherit_id" ref="project.view_task_form2" />
             <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <field name="to_supervisor" invisible="1"/>
+                    <button name="action_send_to_supervisor" string="Approve by Boss" type="object" attrs="{'invisible': [('is_fsm', '=', False),('to_supervisor','=', False)]}"/>
+                    <button name="action_approved" string="Approve" type="object" attrs="{'invisible': [('is_fsm', '=', False),('to_supervisor','=', True)]}"/>
+                    <button name="action_denied" string="Reject" type="object" attrs="{'invisible': [('is_fsm', '=', False),('to_supervisor','=', True)]}"/>
+                </xpath>
+                
                 <xpath expr="//notebook" position="inside">
                     <page name="materials" string="Materials" attrs="{'invisible': [('is_fsm', '=', False)]}">
                         <field name="material_ids" nolabel="1" >

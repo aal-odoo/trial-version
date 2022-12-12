@@ -10,7 +10,7 @@ class FsmMaterial(models.Model):
         string='Product'
     )
     quantity = fields.Float(string='Quantity')
-    qty_on_hand = fields.Float(string='Quantity on Hand',)#related='product_id.qty_available'
+    qty_on_hand = fields.Float(string='Quantity on Hand', related='product_id.qty_available')#related='product_id.qty_available'
     uom_id = fields.Many2one(
         comodel_name='uom.uom',
         string='UOM',

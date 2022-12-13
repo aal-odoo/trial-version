@@ -11,8 +11,10 @@ class ProjectTask(models.Model):
     string='Materials'
     )
 
+    is_saleorder = fields.Boolean(string="Require Saleorder")
+
     to_supervisor = fields.Boolean(string='To supervisor', default=False, copied=False)
-    parent_id = fields.Many2one(comodel_name='project.task', string='Parent Task')
+    picking_id = fields.One2many(comodel_name="stock.picking",inverse_name='service_id', string='Delivery Order')
 
     def action_send_to_supervisor(self):
         for rec in self:
@@ -51,12 +53,12 @@ class ProjectTask(models.Model):
         return
 
     def action_denied(self):
-        service = self.copy()
-        service.write({
-            'name':'Review materials and send to validate',
-            'parent_id': self.id,
-            'material_ids': [(6,0,material_ids.ids)],
-            'to_supervisor':False,
-            'description': 'Review materials and send to validate - ' + self.name
+        self.env['mail.activity'].create({
+            'activity_type_id':self.env.ref('mail.mail_activity_data_todo').id,
+            'note':'Review materials and send to validate',
+            'date_deadline':fields.Date.today(),
+            'user_id':self.env.user.id,
+            'res_model_id':self.env.ref('project.model_project_task').id,
+            'res_id':self.id
         })
         return

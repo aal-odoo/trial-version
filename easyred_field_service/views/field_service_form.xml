@@ -3,17 +3,23 @@
         <record id="field_service_form_inherit_easyred" model="ir.ui.view" >
             <field name="name">view.field.service.form.inherit.easyred</field>
             <field name="model">project.task</field>
-            <field name="inherit_id" ref="project.view_task_form2" />
+            <field name="inherit_id" ref="industry_fsm_sale.view_task_form2_inherit" />
             <field name="arch" type="xml">
                 <xpath expr="//header" position="inside">
                     <field name="to_supervisor" invisible="1"/>
+                    <field name="is_sale_order" invisible='1'/>
                     <button name="action_send_to_supervisor" string="Approve by Boss" type="object" attrs="{'invisible': ['|',('is_fsm', '=', False),('to_supervisor','=', True)]}"/>
                     <button name="action_approved" string="Approve" type="object" attrs="{'invisible': ['|',('is_fsm', '=', False),('to_supervisor','=', False)]}"/>
                     <button name="action_denied" string="Reject" type="object" attrs="{'invisible': ['|',('is_fsm', '=', False),('to_supervisor','=', False)]}"/>
                 </xpath>
-                
+                <button name="action_fsm_view_material" position="attributes">
+                    <attribute name='attrs'>"{'invisible': ['|','|', '&amp;', ('partner_id', '=', False), ('is_fsm', '=', False), ('allow_material', '=', False),('is_sale_order','=',False)]}"</attribute>
+                </button>
+                <field name="user_ids" position="after">
+                    <field name="is_saleorder" attrs="{'invisible': ['|',('is_fsm', '=', False)]}"/>
+                </field>
                 <xpath expr="//notebook" position="inside">
-                    <page name="materials" string="Materials" attrs="{'invisible': [('is_fsm', '=', False)]}">
+                    <page name="materials" string="Materials" attrs="{'invisible': ['|',('is_fsm', '=', False),('is_saleorder','=',True)]}">
                         <field name="material_ids" nolabel="1" >
                             <tree editable="bottom">
                                 <field name="task_id" invisible="1"/>

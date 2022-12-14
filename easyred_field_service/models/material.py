@@ -21,4 +21,3 @@ class FsmMaterial(models.Model):
         string='Task'
     )
 
-

@@ -40,6 +40,7 @@ The warehouse receives requests for materials associated with the task.
     ],
     'data': [
         'security/ir.model.access.csv',
+        'security/approval_group.xml',
         'views/field_service_form.xml'
     ],
     

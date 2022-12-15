@@ -13,10 +13,10 @@
                     <button name="action_denied" string="Reject" type="object" attrs="{'invisible': ['|',('is_fsm', '=', False),('to_supervisor','=', False)]}" groups="easyred_field_service.group_task_approval"/>
                 </xpath>
                 <button name="action_fsm_view_material" position="attributes">
-                    <attribute name='attrs'>"{'invisible': ['|','|', '&amp;', ('partner_id', '=', False), ('is_fsm', '=', False), ('allow_material', '=', False),('is_saleorder','=',False)]}"</attribute>
+                    <attribute name='attrs'>{'invisible': ['|','|', '&amp;', ('partner_id', '=', False), ('is_fsm', '=', False), ('allow_material', '=', False),('is_saleorder','=',False)]}</attribute>
                 </button>
                 <field name="user_ids" position="after">
-                    <field name="is_saleorder" attrs="{'invisible': ['|',('is_fsm', '=', False)]}"/>
+                    <field name="is_saleorder" attrs="{'invisible': [('is_fsm', '=', False)]}"/>
                 </field>
                 <xpath expr="//notebook" position="inside">
                     <page name="materials" string="Materials" attrs="{'invisible': ['|',('is_fsm', '=', False),('is_saleorder','=',True)]}">

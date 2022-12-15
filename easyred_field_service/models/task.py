@@ -14,15 +14,24 @@ class ProjectTask(models.Model):
     is_saleorder = fields.Boolean(string="Require Saleorder")
 
     to_supervisor = fields.Boolean(string='To supervisor', default=False, copied=False)
-    picking_id = fields.One2many(comodel_name="stock.picking",inverse_name='service_id', string='Delivery Order')
+    picking_ids = fields.One2many(comodel_name="stock.picking",inverse_name='service_id', string='Delivery Order')
+    picking_count = fields.Integer(
+        string='Stock Count',
+        compute="_compute_delivery_count"
+    )
+    
+    def _compute_delivery_count(self):
+        for picking in self:
+            picking.picking_count = len(picking.picking_ids)
 
     def action_send_to_supervisor(self):
         for rec in self:
             rec.to_supervisor = True
     
     def action_approved(self):
-        if self.parent_id:
-            self.parent_id.action_approved()
+        if not self.user_has_groups('easyred_field_service.group_task_approval') or self.to_supervisor == False:
+            return 
+
         picking = self.env['stock.picking']
         move = self.env['stock.move']
         picking_type = self.env['stock.picking.type'].search([('code','=','outgoing')])

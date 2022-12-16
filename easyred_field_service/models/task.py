@@ -13,7 +13,7 @@ class ProjectTask(models.Model):
 
     is_saleorder = fields.Boolean(string="Require Saleorder")
 
-    to_supervisor = fields.Boolean(string='To supervisor', default=False, copied=False)
+    to_supervisor = fields.Boolean(string='To supervisor', default=False)
     picking_ids = fields.One2many(comodel_name="stock.picking",inverse_name='service_id', string='Delivery Order')
     picking_count = fields.Integer(
         string='Stock Count',

@@ -20,4 +20,3 @@ class FsmMaterial(models.Model):
         comodel_name='project.task',
         string='Task'
     )
-

@@ -2,6 +2,8 @@ from odoo import Command
 from odoo.tests import tagged
 from .common import TestEasyredFsmCommon
 
+
+@tagged('post_install', '-at_install')
 class TestFsmAprovalFlow(TestEasyredFsmCommon):
 
     @classmethod
@@ -29,4 +31,3 @@ class TestFsmAprovalFlow(TestEasyredFsmCommon):
         self.assertTrue(self.task.picking_ids,'Picking gets created')
 
         self.assertEqual(self.material.quantity,self.picking_ids.move_ids_without_package.product_uom_qty,"quantity on material and stock move should be equal")
-        

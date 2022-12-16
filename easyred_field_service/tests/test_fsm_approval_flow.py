@@ -12,7 +12,8 @@ class TestFsmAprovalFlow(TestEasyredFsmCommon):
         cls.material = cls.env['fsm.material'].create({
             'product_id': cls.product_delivered.id,
             'quantity': 5,
-            'task_id':cls.task.id
+            'task_id':cls.task.id,
+            'qty_on_hand':cls.product_delivered.qty_available
         })
 
     def test_fsm_approval_flow(self):

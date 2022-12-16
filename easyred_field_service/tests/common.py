@@ -7,9 +7,9 @@ class TestEasyredFsmCommon(TestFsmFlowCommon):
         super(TestEasyredFsmCommon, cls).setUpClass()
 
         cls.project_admin = cls.env['res.users'].create({
-            'name': 'Armande Project_admin',
-            'login': 'Armande',
-            'email': 'armande.project_admin@example.com',
+            'name': 'Test Project_admin',
+            'login': 'Test',
+            'email': 'test.project_admin@example.com',
             'groups_id': [(6, 0, [cls.env.ref('easyred_field_service.group_task_approval').id])]
         })
 

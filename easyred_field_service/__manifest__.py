@@ -43,6 +43,4 @@ The warehouse receives requests for materials associated with the task.
         'security/approval_group.xml',
         'views/field_service_form.xml'
     ],
-    
-
 }

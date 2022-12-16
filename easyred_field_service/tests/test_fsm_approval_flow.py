@@ -11,7 +11,6 @@ class TestFsmAprovalFlow(TestEasyredFsmCommon):
             'product_id': cls.product_delivered.id,
             'quantity': 5,
             'task_id':cls.task.id
-
         })
 
     def test_fsm_approval_flow(self):
@@ -30,3 +29,4 @@ class TestFsmAprovalFlow(TestEasyredFsmCommon):
         self.assertTrue(self.task.picking_ids,'Picking gets created')
 
         self.assertEqual(self.material.quantity,self.picking_ids.move_ids_without_package.product_uom_qty,"quantity on material and stock move should be equal")
+        

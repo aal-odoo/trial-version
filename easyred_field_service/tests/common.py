@@ -31,6 +31,3 @@ class TestEasyredFsmCommon(TestFsmFlowCommon):
             'qty_available': 20,
             'uom_id': cls.env.ref('uom.product_uom_unit').id,
         })
-
-
-        # new test.py to test the whole flow

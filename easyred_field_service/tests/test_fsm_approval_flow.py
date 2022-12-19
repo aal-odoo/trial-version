@@ -9,6 +9,7 @@ class TestFsmAprovalFlow(TestEasyredFsmCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        print(cls.product_delivered.qty_available,'\n\n\n')
         cls.material = cls.env['fsm.material'].create({
             'product_id': cls.product_delivered.id,
             'quantity': 5,

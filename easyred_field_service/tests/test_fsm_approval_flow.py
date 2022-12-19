@@ -9,16 +9,13 @@ class TestFsmAprovalFlow(TestEasyredFsmCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        print(cls.product_delivered.qty_available,'\n\n\n')
         cls.material = cls.env['fsm.material'].create({
             'product_id': cls.product_delivered.id,
             'quantity': 5,
             'task_id':cls.task.id,
-            'qty_on_hand':cls.product_delivered.qty_available
         })
 
     def test_fsm_approval_flow(self):
-        self.assertEqual(self.material.qty_on_hand,20,"20 quantities are currently on hand for the product")
 
         self.task.with_user(self.project_user).action_approved()
         self.assertFalse(self.task.picking_ids,"Should not be picking because task has not been approved by boss")
